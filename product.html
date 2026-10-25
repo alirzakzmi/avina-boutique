@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات محصول | بوتیک آوینا</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="product">
+
+<div id="app-header"></div>
+
+<main class="container">
+    <nav class="breadcrumb">
+        <a href="index.html">خانه</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+        <a href="products.html">محصولات</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+        <span id="breadcrumbName">محصول</span>
+    </nav>
+
+    <div class="product-detail" id="productDetail"></div>
+
+    <section class="detail-section">
+        <h2 class="detail-section-title">محصولات مشابه</h2>
+        <div class="product-grid" id="relatedProducts"></div>
+    </section>
+</main>
+
+<div id="app-footer"></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="components/header.js"></script>
+<script src="components/footer.js"></script>
+<script src="assets/script.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const productId = parseInt(params.get('id')) || 1;
+const product = PRODUCTS.find(p => p.id === productId) || PRODUCTS[0];
+let selectedSize = product.sizes[0] || null;
+let selectedColor = product.colors[0]?.name || null;
+
+function renderDetail() {
+    document.getElementById('breadcrumbName').textContent = product.name;
+
+    document.getElementById('productDetail').innerHTML = `
+        <div>
+            <div class="detail-image-wrap"><img src="${product.image}" alt="${product.name}"></div>
+        </div>
+        <div>
+            <h1 class="detail-title">${product.name}</h1>
+            <div class="detail-desc">این محصول از باکیفیت‌ترین مواد اولیه تولید شده و مناسب استفاده روزمره و مجالس است.</div>
+            ${product.sizes.length ? `
+            <div class="detail-options">
+                <div class="option-group">
+                    <div class="option-label">انتخاب سایز</div>
+                    <div class="option-values" id="sizeOptions">
+                        ${product.sizes.map(s => `<button class="option-btn ${s === selectedSize ? 'active' : ''}" onclick="selectSize('${s}')">${s}</button>`).join('')}
+                    </div>
+                </div>
+                ${product.colors.length ? `
+                <div class="option-group">
+                    <div class="option-label">انتخاب رنگ</div>
+                    <div class="option-values" id="colorOptions">
+                        ${product.colors.map(c => `
+                            <button class="option-btn ${c.name === selectedColor ? 'active' : ''}" onclick="selectColor('${c.name}')">
+                                <span class="option-color-dot" style="background:${c.hex}"></span>${c.name}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>` : ''}
+            </div>` : ''}
+        </div>
+        <div>
+            <div class="detail-buy-box">
+                ${product.oldPrice ? `<div class="product-old-price">${formatPrice(product.oldPrice)}</div>` : ''}
+                <div class="detail-price">${formatPrice(product.price)}</div>
+                <div class="detail-stock"><span class="detail-stock-dot"></span>موجود</div>
+                <button class="detail-buy-btn" onclick="addToCart(${product.id})">افزودن به سبد خرید</button>
+                <div class="detail-features">
+                    <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>ارسال سریع</div>
+                    <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>ضمانت اصالت</div>
+                    <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>بازگشت تا ۷ روز</div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('relatedProducts').innerHTML = PRODUCTS
+        .filter(p => p.id !== product.id).slice(0, 4)
+        .map(p => `
+            <article class="product-card">
+                <a href="product.html?id=${p.id}" class="product-img-wrap">
+                    ${p.discount ? `<span class="product-badge">${p.discount}٪</span>` : ''}
+                    <img src="${p.image}" alt="${p.name}">
+                </a>
+                <div class="product-info">
+                    <h3 class="product-name"><a href="product.html?id=${p.id}">${p.name}</a></h3>
+                    <div class="product-price">${formatPrice(p.price)}</div>
+                    <a href="product.html?id=${p.id}" class="product-btn product-btn-outline">مشاهده محصول</a>
+                </div>
+            </article>
+        `).join('');
+}
+
+function selectSize(s) {
+    selectedSize = s;
+    document.querySelectorAll('#sizeOptions .option-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === s));
+}
+function selectColor(c) {
+    selectedColor = c;
+    document.querySelectorAll('#colorOptions .option-btn').forEach(b => b.classList.toggle('active', b.textContent.includes(c)));
+}
+
+document.addEventListener('DOMContentLoaded', renderDetail);
+</script>
+</body>
+</html>

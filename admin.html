@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مدیریت | بوتیک آوینا</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="admin-body">
+
+<!-- ═══ Sidebar ═══ -->
+<aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-header">
+        <div class="logo-icon">A</div>
+        <div>
+            <h2>بوتیک آوینا</h2>
+            <div class="sub">ADMIN PANEL</div>
+        </div>
+    </div>
+
+    <nav class="admin-nav">
+        <a href="#dashboard" class="admin-nav-link" data-view="dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            داشبورد
+        </a>
+        <a href="#products" class="admin-nav-link" data-view="products">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11v10"/></svg>
+            محصولات
+        </a>
+        <a href="#orders" class="admin-nav-link" data-view="orders">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l4 4v16H6z"/><path d="M14 2v4h4"/><path d="M9 12h6M9 16h6"/></svg>
+            سفارش‌ها
+        </a>
+        <a href="#customers" class="admin-nav-link" data-view="customers">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M17 11a4 4 0 0 0 0-8"/><path d="M22 21c0-3-2-5-5-5"/></svg>
+            مشتریان
+        </a>
+        <a href="#settings" class="admin-nav-link" data-view="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+            تنظیمات
+        </a>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+        <div class="admin-user">
+            <div class="admin-avatar">م</div>
+            <div class="admin-user-info">
+                <div class="name">مدیر فروشگاه</div>
+                <div class="email">admin@avina.ir</div>
+            </div>
+        </div>
+        <a href="index.html" class="admin-logout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+            خروج
+        </a>
+    </div>
+</aside>
+
+<div class="admin-overlay" id="adminOverlay" onclick="closeAdminSidebar()"></div>
+
+<!-- ═══ Main ═══ -->
+<div class="admin-main">
+    <header class="admin-header">
+        <button class="admin-menu-toggle" onclick="openAdminSidebar()" aria-label="منو">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="20" height="20">
+                <path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>
+            </svg>
+        </button>
+        <h1 id="pageTitle">داشبورد</h1>
+        <div class="admin-header-actions">
+            <a href="index.html" class="admin-header-link">مشاهده فروشگاه</a>
+        </div>
+    </header>
+
+    <div class="admin-content" id="adminContent"></div>
+</div>
+
+<!-- ═══ Add Product Modal ═══ -->
+<div class="admin-modal" id="productModal">
+    <div class="admin-modal-content">
+        <div class="admin-modal-header">
+            <h2 class="admin-modal-title">افزودن محصول جدید</h2>
+            <button class="admin-modal-close" onclick="closeProductModal()" aria-label="بستن">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="m6 6 12 12"/><path d="m18 6-12 12"/></svg>
+            </button>
+        </div>
+
+        <form id="addProductForm">
+            <div class="admin-form-group">
+                <label class="admin-form-label" for="pName">نام محصول *</label>
+                <input type="text" id="pName" class="admin-input" required placeholder="مثلاً: شومیز زنانه ابریشمی">
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-form-group">
+                    <label class="admin-form-label" for="pPrice">قیمت (تومان) *</label>
+                    <input type="number" id="pPrice" class="admin-input" required min="0" placeholder="950000">
+                </div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label" for="pOldPrice">قیمت قبلی (اختیاری)</label>
+                    <input type="number" id="pOldPrice" class="admin-input" min="0" placeholder="1200000">
+                </div>
+            </div>
+
+            <div class="admin-form-group">
+                <label class="admin-form-label" for="pImage">آدرس تصویر *</label>
+                <input type="text" id="pImage" class="admin-input" required placeholder="images/example.jpg">
+                <div class="admin-form-hint">می‌تونید از تصاویر موجود استفاده کنید، مثلاً: images/PAMGrygCiNqO3sg01IsGYEqcyq2nbv4EXRSPla0n_Ncg3.jpg</div>
+            </div>
+
+            <div class="admin-form-group">
+                <label class="admin-form-label" for="pSizes">سایزها (اختیاری)</label>
+                <input type="text" id="pSizes" class="admin-input" placeholder="S, M, L, XL">
+                <div class="admin-form-hint">با کاما جدا کنید. برای اکسسوری خالی بگذارید.</div>
+            </div>
+
+            <button type="submit" class="admin-btn-add" style="width:100%;justify-content:center;margin-top:8px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 5v14M5 12h14"/></svg>
+                افزودن محصول
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/script.js"></script>
+<script>
+/* ═══════════ ADMIN ROUTING ═══════════ */
+const TITLES = {
+    dashboard: 'داشبورد',
+    products: 'محصولات',
+    orders: 'سفارش‌ها',
+    customers: 'مشتریان',
+    settings: 'تنظیمات'
+};
+
+let currentView = 'dashboard';
+
+function handleRoute() {
+    const hash = window.location.hash.replace('#', '') || 'dashboard';
+    currentView = hash in TITLES ? hash : 'dashboard';
+    document.getElementById('pageTitle').textContent = TITLES[currentView] || 'پنل مدیریت';
+    document.querySelectorAll('.admin-nav-link').forEach(a => {
+        a.classList.toggle('active', a.dataset.view === currentView);
+    });
+    renderView();
+    closeAdminSidebar();
+}
+
+function renderView() {
+    const c = document.getElementById('adminContent');
+    if (currentView === 'dashboard') renderDashboard(c);
+    else if (currentView === 'products') renderProducts(c);
+    else c.innerHTML = notAvailableHTML();
+}
+
+/* ═══════════ DASHBOARD ═══════════ */
+function renderDashboard(c) {
+    const total = PRODUCTS.length;
+    const withDiscount = PRODUCTS.filter(p => p.discount).length;
+    const avgPrice = total
+        ? Math.round(PRODUCTS.reduce((s, p) => s + p.price, 0) / total)
+        : 0;
+    const latest = [...PRODUCTS].slice(-4).reverse();
+
+    const cards = `
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7 12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11v10"/></svg>
+                </div>
+                <div class="stat-value">${total}</div>
+                <div class="stat-label">تعداد محصولات</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                </div>
+                <div class="stat-value">${withDiscount}</div>
+                <div class="stat-label">محصولات تخفیف‌دار</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon amber">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div class="stat-value">${formatPrice(avgPrice)}</div>
+                <div class="stat-label">میانگین قیمت</div>
+            </div>
+        </div>
+
+        <div class="admin-table-wrap">
+            <div class="admin-table-header">
+                <h2>آخرین محصولات اضافه‌شده</h2>
+                <a href="#products" class="admin-header-link">مدیریت محصولات</a>
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr><th>محصول</th><th>قیمت</th><th>وضعیت</th></tr>
+                </thead>
+                <tbody>
+                    ${latest.map(p => `
+                        <tr>
+                            <td style="display:flex;align-items:center;gap:10px">
+                                <img src="${p.image}" alt="${p.name}" style="width:40px;height:40px;object-fit:cover;border-radius:8px">
+                                <span>${p.name}</span>
+                            </td>
+                            <td>${formatPrice(p.price)}</td>
+                            <td>
+                                ${p.discount
+                                    ? `<span class="admin-badge success">${p.discount}٪ تخفیف</span>`
+                                    : `<span class="admin-badge">عادی</span>`}
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+    c.innerHTML = cards;
+}
+
+/* ═══════════ PRODUCTS ═══════════ */
+function renderProducts(c) {
+    const rows = PRODUCTS.length
+        ? PRODUCTS.map(p => `
+            <tr>
+                <td style="display:flex;align-items:center;gap:10px;min-width:200px">
+                    <img src="${p.image}" alt="${p.name}" style="width:44px;height:44px;object-fit:cover;border-radius:8px">
+                    <span style="font-weight:600">${p.name}</span>
+                </td>
+                <td>${formatPrice(p.price)}</td>
+                <td>
+                    ${p.discount
+                        ? `<span class="admin-badge warning">${p.discount}٪ تخفیف</span>`
+                        : `<span class="admin-badge success">فعال</span>`}
+                </td>
+                <td class="admin-cell-actions">
+                    <button class="admin-btn admin-btn-danger" onclick="confirmDelete(${p.id})">
+                        حذف
+                    </button>
+                </td>
+            </tr>
+        `).join('')
+        : `<tr><td colspan="4" style="text-align:center;padding:40px;color:#78716c">
+                هنوز محصولی اضافه نشده است.
+           </td></tr>`;
+
+    c.innerHTML = `
+        <div class="admin-toolbar">
+            <div>
+                <h2 style="font-size:18px;font-weight:800">لیست محصولات</h2>
+                <p style="font-size:12px;color:#78716c;margin-top:4px">${PRODUCTS.length} محصول</p>
+            </div>
+            <button class="admin-btn-add" onclick="openProductModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 5v14M5 12h14"/></svg>
+                افزودن محصول
+            </button>
+        </div>
+
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>محصول</th><th>قیمت</th><th>وضعیت</th><th>عملیات</th></tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </div>
+    `;
+}
+
+/* ═══════════ NOT AVAILABLE ═══════════ */
+function notAvailableHTML() {
+    return `
+        <div class="not-available">
+            <div class="not-available-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4"/>
+                    <path d="M12 16h.01"/>
+                </svg>
+            </div>
+            <h2>این صفحه در دسترس نیست</h2>
+            <p>این بخش هنوز آماده نشده است. لطفاً از منوی کناری به داشبورد یا محصولات بروید.</p>
+            <a href="#dashboard">بازگشت به داشبورد</a>
+        </div>
+    `;
+}
+
+/* ═══════════ MODAL ═══════════ */
+function openProductModal() {
+    document.getElementById('productModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('addProductForm').reset();
+    setTimeout(() => document.getElementById('pName').focus(), 100);
+}
+function closeProductModal() {
+    document.getElementById('productModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('addProductForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = {
+        name: document.getElementById('pName').value,
+        price: document.getElementById('pPrice').value,
+        oldPrice: document.getElementById('pOldPrice').value,
+        image: document.getElementById('pImage').value,
+        sizes: document.getElementById('pSizes').value
+    };
+
+    try {
+        const product = addProduct(data);
+        closeProductModal();
+        showToast('✓ محصول «' + product.name + '» اضافه شد');
+        renderView();
+    } catch (err) {
+        alert('خطا در افزودن محصول: ' + err.message);
+    }
+});
+
+/* ═══════════ DELETE ═══════════ */
+function confirmDelete(id) {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (!p) return;
+    if (!confirm(`محصول «${p.name}» حذف بشه؟`)) return;
+    deleteProduct(id);
+    showToast('محصول حذف شد');
+    renderView();
+}
+
+/* ═══════════ SIDEBAR TOGGLE (موبایل) ═══════════ */
+function openAdminSidebar() {
+    document.getElementById('adminSidebar').classList.add('open');
+    document.getElementById('adminOverlay').classList.add('open');
+}
+function closeAdminSidebar() {
+    document.getElementById('adminSidebar').classList.remove('open');
+    document.getElementById('adminOverlay').classList.remove('open');
+}
+
+/* ═══════════ INIT ═══════════ */
+window.addEventListener('hashchange', handleRoute);
+window.addEventListener('DOMContentLoaded', handleRoute);
+</script>
+</body>
+</html>

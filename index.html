@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوتیک آوینا | AVINA BOUTIQUE</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="index">
+
+<div id="app-header"></div>
+
+<main>
+    <section class="container">
+        <div class="hero">
+            <div class="slider-track" id="sliderTrack">
+                <div class="slide">
+                    <img src="images/1zfeN2xi5riH8dTWHxSwZQ9bpc5OKxusN1WfL1Ss_Ncg3.png" alt="" class="slide-img">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <span class="slide-badge">کالکشن جدید</span>
+                        <h2 class="slide-title">استایل تازه برای روزهای تازه</h2>
+                        <p class="slide-desc">جدیدترین انتخاب‌های بوتیک آوینا را ببینید.</p>
+                        <a href="products.html" class="slide-btn">مشاهده محصولات</a>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-arrow prev" onclick="moveSlide(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+            <button class="slider-arrow next" onclick="moveSlide(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <section class="container section">
+        <div class="section-header">
+            <div><div class="section-label">SHOP BY CATEGORY</div><h2 class="section-title">دسته‌بندی محصولات</h2></div>
+            <a href="products.html" class="section-link">همه</a>
+        </div>
+        <div class="cat-grid">
+            <a href="products.html" class="cat-card"><img src="images/X3Jjpmft25uOLNXBp2Q6zBsF0hszSvgzGrd7KL01_Ncg3.jpg" alt="زنانه"><div class="cat-overlay"></div><div class="cat-info"><div class="cat-name">زنانه</div><div class="cat-link">مشاهده محصولات</div></div></a>
+            <a href="products.html" class="cat-card"><img src="images/VJ2rF0NWghqEqvBr3umeZPKoNGzOimMoJ7bbcuB9_Ncg3.jpg" alt="مردانه"><div class="cat-overlay"></div><div class="cat-info"><div class="cat-name">مردانه</div><div class="cat-link">مشاهده محصولات</div></div></a>
+            <a href="products.html" class="cat-card"><img src="images/zrcDi24k3K2eL5Bg2qt3wT6M0H4sCE7RrWDAVB15_Ncg3.jpg" alt="بچگانه"><div class="cat-overlay"></div><div class="cat-info"><div class="cat-name">بچگانه</div><div class="cat-link">مشاهده محصولات</div></div></a>
+            <a href="products.html" class="cat-card"><img src="images/PCOLnMXVy24SPDFCMY4tBaPnmJijKd8RxGru4EsX_Ncg3.png" alt="اکسسوری"><div class="cat-overlay"></div><div class="cat-info"><div class="cat-name">اکسسوری</div><div class="cat-link">مشاهده محصولات</div></div></a>
+        </div>
+    </section>
+
+
+    <section class="container section" style="padding-bottom:48px">
+        <div class="section-header">
+            <div><div class="section-label">LATEST ARRIVALS</div><h2 class="section-title">جدیدترین محصولات</h2></div>
+            <a href="products.html" class="section-link">همه</a>
+        </div>
+        <div class="product-grid" id="homeProducts"></div>
+    </section>
+    
+        <!-- ═══ فروش ویژه ═══ -->
+    <section class="container section">
+        <div class="sale-box">
+            <div class="sale-header">
+                <div>
+                    <div class="sale-label">LIMITED SALE</div>
+                    <h2 class="sale-title">فروش ویژه</h2>
+                </div>
+                <span class="sale-badge">تخفیف‌های فعال</span>
+            </div>
+            <div class="product-grid" id="saleProducts"></div>
+        </div>
+    </section>
+</main>
+
+<div id="app-footer"></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="components/header.js"></script>
+<script src="components/footer.js"></script>
+<script src="assets/script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    /* جدیدترین محصولات (۴ تای اول) */
+    const homeGrid = document.getElementById('homeProducts');
+    if (homeGrid) {
+        homeGrid.innerHTML = PRODUCTS.slice(0, 4).map(productCardHTML).join('');
+    }
+
+    /* فروش ویژه — فقط محصولات تخفیف‌دار */
+    const saleGrid = document.getElementById('saleProducts');
+    if (saleGrid) {
+        saleGrid.innerHTML = PRODUCTS
+            .filter(p => p.discount)
+            .slice(0, 4)
+            .map(productCardHTML)
+            .join('');
+    }
+});
+</script>
+</body>
+</html>

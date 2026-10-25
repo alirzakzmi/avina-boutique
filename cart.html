@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سبد خرید | بوتیک آوینا</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="cart">
+
+<div id="app-header"></div>
+
+<main class="container">
+    <div class="page-header">
+        <h1 class="page-title">سبد خرید</h1>
+        <p class="page-subtitle" id="cartSubtitle">محصولات انتخاب‌شده شما</p>
+    </div>
+    <div id="cartContent"></div>
+</main>
+
+<div id="app-footer"></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="components/header.js"></script>
+<script src="components/footer.js"></script>
+<script src="assets/script.js"></script>
+<script>
+function renderCartPage() {
+    const container = document.getElementById('cartContent');
+    const subtitle = document.getElementById('cartSubtitle');
+
+    if (cart.length === 0) {
+        subtitle.textContent = 'سبد خرید شما در حال حاضر خالی است';
+        container.innerHTML = `
+            <div class="cart-empty" style="margin-top:24px;margin-bottom:48px">
+                <h2>سبد خرید شما خالی است</h2>
+                <p>می‌توانید از فروشگاه، محصولات مورد علاقه‌ی خود را انتخاب کنید.</p>
+                <a href="products.html">مشاهده محصولات</a>
+            </div>`;
+        return;
+    }
+
+    subtitle.textContent = `${cartCount()} محصول در سبد شما`;
+
+    const itemsHtml = cart.map(item => {
+        const p = PRODUCTS.find(x => x.id === item.id);
+        if (!p) return '';
+        return `
+            <div class="cart-item">
+                <div class="cart-item-img"><img src="${p.image}" alt="${p.name}"></div>
+                <div class="cart-item-info">
+                    <div>
+                        <div class="cart-item-name">${p.name}</div>
+                        <div class="cart-item-price">${formatPrice(p.price)}</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <div class="qty-control">
+                            <button class="qty-btn" onclick="updateQty(${p.id}, -1)">−</button>
+                            <span class="qty-value">${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${p.id}, 1)">+</button>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${p.id})">حذف</button>
+                    </div>
+                </div>
+            </div>`;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="cart-layout">
+            <div class="cart-items">${itemsHtml}</div>
+            <div class="cart-summary">
+                <h2 class="summary-title">خلاصه سفارش</h2>
+                <div class="summary-row"><span>تعداد اقلام</span><span>${cartCount()} عدد</span></div>
+                <div class="summary-row"><span>هزینه ارسال</span><span>رایگان</span></div>
+                <div class="summary-row total"><span>مبلغ کل</span><span>${formatPrice(cartTotal())}</span></div>
+                <button class="summary-btn" onclick="alert('اتصال به درگاه پرداخت در نسخه اصلی')">ادامه جهت ثبت سفارش</button>
+            </div>
+        </div>`;
+}
+
+document.addEventListener('DOMContentLoaded', renderCartPage);
+</script>
+</body>
+</html>
